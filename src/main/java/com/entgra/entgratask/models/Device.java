@@ -6,18 +6,18 @@ import java.util.Date;
 public class Device {
     private int id;
     private String name;
-    private Status status;
     private String model;
+    private Status status;
     private Date enrolledTime;
 
     public Device() {
     }
 
-    public Device(int id, String name, Status status, String model, Date enrolledTime) {
+    public Device(int id, String name, String model, Status status,  Date enrolledTime) {
         this.id = id;
         this.name = name;
-        this.status = status;
         this.model = model;
+        this.status = status;
         this.enrolledTime = enrolledTime;
     }
 
@@ -37,20 +37,20 @@ public class Device {
         this.name = name;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public String getModel() {
         return model;
     }
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Date getEnrolledTime() {

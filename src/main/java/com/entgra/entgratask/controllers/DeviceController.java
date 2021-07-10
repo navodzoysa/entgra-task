@@ -4,13 +4,11 @@ import com.entgra.entgratask.models.Device;
 import com.entgra.entgratask.services.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/device")
 public class DeviceController {
-
     @Autowired
     private DeviceService deviceService;
 
