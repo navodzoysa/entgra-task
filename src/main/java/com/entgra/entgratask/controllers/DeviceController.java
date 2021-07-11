@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/device")
@@ -17,16 +18,24 @@ public class DeviceController {
 
     @GetMapping
     ObjectNode findAll() {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.convertValue(deviceService.findAll(), JsonNode.class);
-        return ApplicationUtil.createResponse(jsonNode, true);
+        Collection<Device> allDevices = deviceService.findAll();
+        if(allDevices.size() > 0) {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = mapper.convertValue(allDevices, JsonNode.class);
+            return ApplicationUtil.createResponse(jsonNode, true);
+        }
+        return ApplicationUtil.createResponse("No devices found", true);
     }
 
     @GetMapping("{id}")
     ObjectNode findById(@PathVariable int id) {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.convertValue(deviceService.findById(id), JsonNode.class);
-        return ApplicationUtil.createResponse(jsonNode, true);
+        Device foundDevice = deviceService.findById(id);
+        if(foundDevice != null) {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = mapper.convertValue(foundDevice, JsonNode.class);
+            return ApplicationUtil.createResponse(jsonNode, true);
+        }
+        return ApplicationUtil.createResponse("No device found with id " + id, true);
     }
 
     @PostMapping
