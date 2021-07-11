@@ -1,8 +1,7 @@
 package com.entgra.entgratask.models;
 
 import com.entgra.entgratask.models.enums.Status;
-
-import java.sql.Date;
+import java.sql.Timestamp;
 
 
 public class Device {
@@ -10,12 +9,12 @@ public class Device {
     private String name;
     private String model;
     private Status status;
-    private Date enrolledTime;
+    private Timestamp enrolledTime;
 
     public Device() {
     }
 
-    public Device(int id, String name, String model, Status status,  Date enrolledTime) {
+    public Device(int id, String name, String model, Status status,  Timestamp enrolledTime) {
         this.id = id;
         this.name = name;
         this.model = model;
@@ -55,11 +54,11 @@ public class Device {
         this.status = status;
     }
 
-    public Date getEnrolledTime() {
+    public Timestamp getEnrolledTime() {
         return enrolledTime;
     }
 
-    public void setEnrolledTime(Date enrolledTime) {
+    public void setEnrolledTime(Timestamp enrolledTime) {
         this.enrolledTime = enrolledTime;
     }
 

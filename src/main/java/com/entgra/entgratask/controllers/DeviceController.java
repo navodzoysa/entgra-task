@@ -2,9 +2,12 @@ package com.entgra.entgratask.controllers;
 
 import com.entgra.entgratask.models.Device;
 import com.entgra.entgratask.services.DeviceService;
+import com.entgra.entgratask.utils.ApplicationUtil;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.Collection;
 
 @RestController
 @RequestMapping("/device")
@@ -13,27 +16,31 @@ public class DeviceController {
     private DeviceService deviceService;
 
     @GetMapping
-    public Collection<Device> findAll() {
-        return deviceService.findAll();
+    ObjectNode findAll() {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonNode = mapper.convertValue(deviceService.findAll(), JsonNode.class);
+        return ApplicationUtil.createResponse(jsonNode, true);
     }
 
     @GetMapping("{id}")
-    Device findById(@PathVariable int id) {
-        return deviceService.findById(id);
+    ObjectNode findById(@PathVariable int id) {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonNode = mapper.convertValue(deviceService.findById(id), JsonNode.class);
+        return ApplicationUtil.createResponse(jsonNode, true);
     }
 
     @PostMapping
-    String save(@RequestBody Device device) {
-        return deviceService.save(device);
+    ObjectNode save(@RequestBody Device device) {
+        return ApplicationUtil.createResponse(deviceService.save(device), true);
     }
 
     @PutMapping
-    String update(@RequestBody Device device) {
-        return deviceService.update(device);
+    ObjectNode update(@RequestBody Device device) {
+        return ApplicationUtil.createResponse(deviceService.update(device), true);
     }
 
     @DeleteMapping("{id}")
-    String deleteById(@PathVariable int id) {
-        return deviceService.deleteById(id);
+    ObjectNode deleteById(@PathVariable int id) {
+        return ApplicationUtil.createResponse(deviceService.deleteById(id), true);
     }
 }

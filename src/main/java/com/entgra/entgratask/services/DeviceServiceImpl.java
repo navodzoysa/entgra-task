@@ -23,9 +23,9 @@ public class DeviceServiceImpl implements DeviceService {
     public String save(Device device) {
         boolean saved = deviceDAO.save(device);
         if(saved) {
-            return "Successfully saved device with id " + device.getId();
+            return "Successfully saved device with name " + device.getName();
         }
-        return "false";
+        return "Device was not saved";
     }
 
     @Override
@@ -34,7 +34,7 @@ public class DeviceServiceImpl implements DeviceService {
         if(updated) {
             return "Successfully updated device with id " + device.getId();
         }
-        return "false";
+        return "Device was not updated";
     }
 
     @Override
