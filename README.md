@@ -13,17 +13,17 @@ A Spring Boot application built to learn about API layer, Service layer and DAO 
 
 ### Steps to run locally
 
-######There are two ways you can run this project:
+#### There are two ways you can run this project:
 
 1. Run ```mvn spring-boot:run``` in the terminal on the root directory
 
-######or
+#### or
 
 1. Run ```mvn clean install``` in the root directory
 2. Go to target folder using ```cd target```
 3. Run ```java -jar entgra-task-0.0.1-SNAPSHOT.jar```
 
-######Application will run on http://localhost:8080
+#### Application will run on http://localhost:8080
 
 ### API
 
