@@ -8,9 +8,9 @@ public interface DAO<T> {
 
     Optional<T> get(int id);
 
-    void save(T t);
+    boolean save(T t);
 
-    void update(T t);
+    boolean update(T t);
 
-    void delete(int id);
+    boolean delete(int id);
 }

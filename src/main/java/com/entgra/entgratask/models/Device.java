@@ -1,7 +1,9 @@
 package com.entgra.entgratask.models;
 
 import com.entgra.entgratask.models.enums.Status;
-import java.util.Date;
+
+import java.sql.Date;
+
 
 public class Device {
     private int id;

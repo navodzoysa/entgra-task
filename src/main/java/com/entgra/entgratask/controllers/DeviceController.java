@@ -23,17 +23,17 @@ public class DeviceController {
     }
 
     @PostMapping
-    Device save(@RequestBody Device device) {
+    String save(@RequestBody Device device) {
         return deviceService.save(device);
     }
 
     @PutMapping
-    Device update(@RequestBody Device device) {
+    String update(@RequestBody Device device) {
         return deviceService.update(device);
     }
 
     @DeleteMapping("{id}")
-    Device deleteById(@PathVariable int id) {
+    String deleteById(@PathVariable int id) {
         return deviceService.deleteById(id);
     }
 }

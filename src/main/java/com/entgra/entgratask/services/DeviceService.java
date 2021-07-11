@@ -8,9 +8,9 @@ public interface DeviceService {
 
     Device findById(int id);
 
-    Device save(Device device);
+    String save(Device device);
 
-    Device update(Device device);
+    String update(Device device);
 
-    Device deleteById(int id);
+    String deleteById(int id);
 }

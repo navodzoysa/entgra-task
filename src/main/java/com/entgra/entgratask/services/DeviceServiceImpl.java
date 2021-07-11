@@ -2,26 +2,12 @@ package com.entgra.entgratask.services;
 
 import com.entgra.entgratask.dao.DeviceDAO;
 import com.entgra.entgratask.models.Device;
-import com.entgra.entgratask.models.enums.Status;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
 public class DeviceServiceImpl implements DeviceService {
     private static DeviceDAO deviceDAO = new DeviceDAO();
-
-    private int deviceId = 1;
-    private Map<Integer, Device> deviceMap = new HashMap<>();
-
-    {
-        Device device = new Device();
-        device.setId(deviceId);
-        device.setName("myphone");
-        device.setModel("Oneplus 6");
-        device.setStatus(Status.ACTIVE);
-        device.setEnrolledTime(new Date(System.currentTimeMillis()));
-        deviceMap.put(device.getId(), device);
-    }
 
     @Override
     public Collection<Device> findAll() {
@@ -30,36 +16,33 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Device findById(int id) {
-        deviceDAO.get(id);
-        return deviceMap.get(id);
+        return deviceDAO.get(id).orElse(null);
     }
 
     @Override
-    public Device save(Device device) {
-        deviceDAO.save(device);
-        int newDeviceId = deviceId + 1;
-        device.setId(newDeviceId);
-        deviceMap.put(device.getId(), device);
-        return deviceMap.get(newDeviceId);
-    }
-
-    @Override
-    public Device update(Device device) {
-        deviceDAO.update(device);
-        deviceId = device.getId();
-        if(deviceMap.get(deviceId) != null) {
-            deviceMap.put(deviceId, device);
-            return device;
+    public String save(Device device) {
+        boolean saved = deviceDAO.save(device);
+        if(saved) {
+            return "Successfully saved device with id " + device.getId();
         }
-        return null;
+        return "false";
     }
 
     @Override
-    public Device deleteById(int id) {
-        deviceDAO.delete(id);
-        if(deviceMap.get(id) != null) {
-            return deviceMap.remove(id);
+    public String update(Device device) {
+        boolean updated = deviceDAO.update(device);
+        if(updated) {
+            return "Successfully updated device with id " + device.getId();
         }
-        return null;
+        return "false";
+    }
+
+    @Override
+    public String deleteById(int id) {
+        boolean deleted = deviceDAO.delete(id);
+        if(deleted) {
+            return "Successfully deleted device with id = " + id;
+        }
+        return "Device was not found";
     }
 }
